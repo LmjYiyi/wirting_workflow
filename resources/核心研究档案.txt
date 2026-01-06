@@ -1,0 +1,1043 @@
+LFMCW 诊断原理与等离子体电磁特性
+
+1. 等离子体传播条件与特征参数
+
+当电磁波的频率大于等离子体的特征频率时，电磁波才能穿透等离子体，其中等离子体的特征频率为：
+
+$$\omega_{p}=\sqrt{\frac{n_{e}e^{2}}{\varepsilon_{0}m_{e}}}$$
+
+等离子体的介电常数为：
+
+$$\varepsilon=(1+\chi_{e})\varepsilon_{0}=\left(1-\frac{\omega_{p}^{2}}{\omega^{2}+\nu_{e}^{2}}-j\frac{\omega_{p}^{2}\nu/\omega}{\omega^{2}+\nu_{e}^{2}}\right)\varepsilon_{0}$$
+
+衰减常数及相移常数：
+
+$$\alpha=\frac{\omega}{\sqrt{2}c}\sqrt{\frac{\omega_{p}^2}{\omega^{2}+\nu_{e}^2}-1+\sqrt{\left(1-\frac{\omega_{p}^2}{\omega^{2}+\nu_{e}^2}\right)^{2}+\left(\frac{\nu_{e}}{\omega}\frac{\omega_{p}^2}{\omega^{2}+\nu_{e}^2}\right)^{2}}}$$
+
+$c$ 代表了光速，上式体现了衰减常数及相移常数与电磁波角频率及等离子体相关参数的关系。衰减常数描述了电磁波在等离子体中传播时的幅值衰减，相移常数描述了传播时的相位变化。$d$ 为电磁波透射过的等离子体厚度。
+
+在等离子体中相对相位偏移可以描述为电磁波在等离子体中的相位变化与在真空中的相位变化的差值，即等离子体引起的附加相移可表示为下式：
+
+$$\Delta\varphi=(\beta-\beta_0)d=\left(\beta-\frac{\omega}{\sqrt{2}c}\right)d$$
+
+为了简化分析，假定电磁波的频率远大于特征频率和碰撞频率时，附加相移可以化简为：
+
+$$\Delta\varphi\approx\frac{\omega d}c\left(\sqrt{1-\frac{\omega_p^2}{\omega^2}}-1\right)$$
+
+当代入等离子体的特征角频率时，附加相移可变为：
+
+$$\Delta\varphi\approx-\frac{e^2dn_e}{2\varepsilon_0m_e\omega c}\quad (\mathrm{rad/m})$$
+
+$n_e$ 为等离子体的电子密度。
+
+2. 微波干涉法与时延诊断原理
+
+我采用微波干涉法，电磁波在不同电子密度的等离子体内传播时，会产生不同的传播时延及衰减，由于传播时延的存在，才导致了电磁波的相位发生变化，即电磁波在等离子体中与在真空中产生的传播时延是不相同的，因此才会产生附加相移。通过测量测试支路在有等离子体时相对于无等离子体的空气状态所产生的时延变化，便可以对电子密度完成参数诊断。
+
+当电磁波穿过厚度为 $d$ 的等离子体时产生的相对相位变化可表示为：
+
+$$\Delta\varphi=\frac{2\pi d}{\lambda_{g}}-\frac{2\pi d}{\lambda_{0}}$$
+
+根据速度与波长的关系也可以表示为：
+
+$$\Delta\varphi=2\pi f\left(\frac{d}{V_{g}}-\frac{d}{c}\right)$$
+
+把 $\tau=\left(\frac{d}{V_g}-\frac{d}{c}\right)$ 定义为时延，表示电磁波在等离子体中相对于在真空中传播时的时间差值。
+
+联立推导：
+
+相移常数：
+
+$$\alpha=\frac{\omega}{\sqrt{2}c}\sqrt{\frac{\omega_{p}^2}{\omega^{2}+\nu_{e}^2}-1+\sqrt{\left(1-\frac{\omega_{p}^2}{\omega^{2}+\nu_{e}^2}\right)^{2}+\left(\frac{\nu_{e}}{\omega}\frac{\omega_{p}^2}{\omega^{2}+\nu_{e}^2}\right)^{2}}}$$
+
+附加相移：
+
+$$\Delta\varphi=(\beta-\beta_0)d=\left(\beta-\frac{\omega}{\sqrt{2}c}\right)d$$
+
+时延：
+
+$$\tau=\left(\frac{d}{V_g}-\frac{d}{c}\right)$$
+
+得到电子密度与传播时延的估算公式：
+
+$$n_e\approx\frac{8\pi^2\varepsilon_0m_ec}{e^2}\frac{f^2}{d}\tau$$
+
+3. LFMCW 信号模型
+
+我在诊断时延的时候是通过 LFMCW 原理：
+
+发射信号：
+
+$$f_T(t)=f_i+Kt,\quad 0\leq t\leq T_m$$
+
+接收信号是发射信号基础之上有一个传播时延：
+
+$$f_R(t)=f_i+K(t-\tau),\quad \tau\leq t\leq\tau+T_m$$
+
+二者经过混频之后得到差频信号：
+
+$$f_D(t)=\begin{cases}
+K(\tau-T_m), & 0\leq t\leq\tau \\
+K\tau, & \tau\leq t\leq T_m
+\end{cases}$$
+
+取规则区：
+
+$$f_R(t)=f_i+K(t-\tau),\quad \tau\leq t\leq\tau+T_m$$
+
+这样就能获得时延。
+
+LFMCW 色散诊断理论全集
+
+本文档汇集了 LFMCW 信号在色散介质中的详细推导、频谱展宽分析、诊断方法研究、工程阈值判据以及基于滑动窗口特征提取的高精度诊断方法。
+
+第一部分：LFMCW 信号在色散介质中的二阶推导
+
+下面给出一份详细的推导，从 LFMCW 发射信号出发，考虑介质色散到二阶项，得到混频后差频信号的相位、瞬时频率、频谱表达式，并给出如何将频谱中扩展的频率转换为时延信息的完整过程。所有参数均以 $B$（调制带宽）、$T_m$（调制周期）、$\omega_0$（起始角频率）、$\tau_0$（起始频率处的群时延）、$\tau_1$（一阶色散系数）和 $\tau_2$（二阶色散系数） 表达。
+
+1. 发射信号及其瞬时频率
+
+采用 LFMCW 信号，其发射信号为：
+
+$$s_T(t)=\exp\Bigl\{j\Bigl[\omega_0\,t+\pi\frac{B}{T_m}t^2\Bigr]\Bigr\},\quad t\in[0,T_m]\,.$$
+
+因此，其相位为：
+
+$$\phi_T(t)=\omega_0t+\pi\frac{B}{T_m}t^2\,.$$
+
+计算瞬时角频率：
+
+$$\omega(t)=\frac{d\phi_T(t)}{dt}=\omega_0+2\pi\frac{B}{T_m}\,t\,.$$
+
+定义调频斜率：
+
+$$K'=\frac{2\pi B}{T_m}\,,$$
+
+则：
+
+$$\omega(t)=\omega_0+K't\,.$$
+
+2. 色散介质中群时延的二阶展开
+
+介质中群时延为 $\tau(\omega)$，在 $\omega_0$ 处做泰勒展开得：
+
+$$\tau(\omega)=\tau_0+\tau_1\,[\omega-\omega_0]+\tfrac{1}{2}\tau_2\,[\omega-\omega_0]^2+\cdots\,.$$
+
+将 $\omega(t)=\omega_0+K't$ 代入，得到传播时延（取到二阶）：
+
+$$\tau(t)=\tau(\omega(t))=\tau_0+\tau_1\,K't+\tfrac{1}{2}\tau_2\,(K't)^2\,.$$
+
+为了后续书写方便，引入记号：
+
+$$A_0=\tau_0,\quad A_1=\tau_1\,K',\quad A_2=\tfrac{1}{2}\tau_2\,(K')^2\,.$$
+
+则：
+
+$$\tau(t)=A_0+A_1t+A_2t^2\,.$$
+
+3. 接收信号与混频过程
+
+传播后接收信号在介质中经历时延 $\tau(t)$，因此接收信号可写为：
+
+$$s_R(t)=\exp\Bigl\{j\Bigl[\omega_0\,(t-\tau(t))+\pi\frac{B}{T_m}\,(t-\tau(t))^2\Bigr]\Bigr\}\,.$$
+
+混频时取发射信号与接收信号的复共轭相乘，得到差频信号：
+
+$$s_D(t)=s_T(t)\,s_R^*(t)=\exp\{j\,\Delta\phi(t)\}\,,$$
+
+其中：
+
+$$\Delta\phi(t)=\phi_T(t)-\phi_R(t)$$
+
+且：
+
+$$\phi_R(t)=\omega_0\Bigl[t-\tau(t)\Bigr]+\pi\frac{B}{T_m}\Bigl[t-\tau(t)\Bigr]^2\,.$$
+
+因此有：
+
+$$\Delta\phi(t)=\omega_0t+\pi\frac{B}{T_m}t^2-\Biggl\{\omega_0\Bigl[t-\tau(t)\Bigr]+\pi\frac{B}{T_m}\Bigl[t-\tau(t)\Bigr]^2\Biggr\}\,.$$
+
+整理得：
+
+$$\Delta\phi(t)=\omega_0\,\tau(t)+\pi\frac{B}{T_m}\Bigl\{2t\,\tau(t)-\tau(t)^2\Bigr\}\,.$$
+
+将 $\tau(t)=A_0+A_1t+A_2t^2$ 代入，注意我们只保留到 $t^2$ 项（忽略 $t^3$ 及更高阶）：
+
+3.1 展开 $\omega_0\,\tau(t)$
+
+$$\omega_0\,\tau(t)=\omega_0\Bigl[A_0+A_1t+A_2t^2\Bigr] =\omega_0A_0+\omega_0A_1t+\omega_0A_2t^2\,.$$
+
+3.2 展开 $2t\,\tau(t)$
+
+$$2t\,\tau(t)=2t\Bigl[A_0+A_1t+A_2t^2\Bigr] =2A_0t+2A_1t^2+2A_2t^3\,.$$
+
+其中 $2A_2t^3$ 为三阶项，舍去，故：
+
+$$2t\,\tau(t)\approx2A_0t+2A_1t^2\,.$$
+
+3.3 展开 $\tau(t)^2$
+
+$$\tau(t)^2=\Bigl[A_0+A_1t+A_2t^2\Bigr]^2 =A_0^2+2A_0A_1t+\Bigl(A_1^2+2A_0A_2\Bigr)t^2+\text{(高阶)}\,.$$
+
+3.4 合并第二部分
+
+第二部分为 $\pi\frac{B}{T_m}\Bigl\{2t\,\tau(t)-\tau(t)^2\Bigr\}$，代入得：
+
+$$\pi\frac{B}{T_m}\Bigl\{2A_0t+2A_1t^2 - \Bigl[A_0^2+2A_0A_1t+(A_1^2+2A_0A_2)t^2\Bigr]\Bigr\}\,.$$
+
+整理后分为各阶：
+
+常数项：$-\pi\frac{B}{T_m}A_0^2$.
+
+线性项：$2\pi\frac{B}{T_m}A_0t -2\pi\frac{B}{T_m}A_0A_1t$.
+
+二次项：$2\pi\frac{B}{T_m}A_1t^2-\pi\frac{B}{T_m}(A_1^2+2A_0A_2)t^2$.
+
+4. 最终相位展开及各系数
+
+将上述两部分相加，得到：
+
+$$\Delta\phi(t)=\phi_0+L\,t+Q\,t^2\,,$$
+
+其中：
+
+4.1 常数项 $\phi_0$
+
+$$\phi_0=\omega_0A_0-\pi\frac{B}{T_m}A_0^2 =\omega_0\tau_0-\pi\frac{B}{T_m}\tau_0^2\,.$$
+
+4.2 线性项系数 $L$
+
+由两部分贡献：
+
+第一部分：$\omega_0A_1=\omega_0\,\tau_1K'$.
+
+第二部分：$2\pi\frac{B}{T_m}A_0-2\pi\frac{B}{T_m}A_0A_1 =2\pi\frac{B}{T_m}\tau_0-2\pi\frac{B}{T_m}\tau_0\,(\tau_1K')$.
+
+故：
+
+$$L=\omega_0\,\tau_1K'+2\pi\frac{B}{T_m}\tau_0-2\pi\frac{B}{T_m}\tau_0\,\tau_1K'\,.$$
+
+定义拍频（单位为 Hz）的中心频率 $f'_0$ 使得 $2\pi f'_0=L$：
+
+$$f'_0=\frac{1}{2\pi}\Bigl[\omega_0\,\tau_1K'+2\pi\frac{B}{T_m}\tau_0-2\pi\frac{B}{T_m}\tau_0\,\tau_1K'\Bigr]\,.$$
+
+注意这里 $K'=\dfrac{2\pi B}{T_m}$。
+
+4.3 二次项系数 $Q$
+
+由两部分：
+
+第一部分：$\omega_0A_2=\omega_0\,\cdot\,\tfrac{1}{2}\tau_2(K')^2=\tfrac{1}{2}\omega_0\,\tau_2(K')^2$.
+
+第二部分：$2\pi\frac{B}{T_m}A_1-\pi\frac{B}{T_m}(A_1^2+2A_0A_2)=2\pi\frac{B}{T_m}(\tau_1K')-\pi\frac{B}{T_m}\Bigl[(\tau_1K')^2+2\tau_0A_2\Bigr]$.
+
+因此：
+
+$$Q=\tfrac{1}{2}\omega_0\,\tau_2(K')^2+2\pi\frac{B}{T_m}\tau_1K'-\pi\frac{B}{T_m}\Bigl[(\tau_1K')^2+2\tau_0A_2\Bigr]\,.$$
+
+定义 $\pi\,\alpha=Q \Longrightarrow \alpha=\frac{Q}{\pi}$，即：
+
+$$\alpha=\frac{1}{2\pi}\omega_0\,\tau_2(K')^2+\frac{2B}{T_m}\tau_1K'-\frac{B}{T_m}\Bigl[(\tau_1K')^2+2\tau_0A_2\Bigr]\,.$$
+
+其中 $A_2=\frac{1}{2}\tau_2(K')^2$ 且 $K'=\dfrac{2\pi B}{T_m}$。
+
+5. 差频信号的瞬时频率表达式
+
+差频信号为：
+
+$$s_D(t)=\exp\{j[\phi_0+2\pi f'_0\,t+\pi\alpha\,t^2]\}\,.$$
+
+其瞬时频率定义为：
+
+$$f_D(t)=\frac{1}{2\pi}\frac{d\Delta\phi(t)}{dt} =\frac{1}{2\pi}\Bigl[2\pi f'_0+2\pi\alpha\,t\Bigr] =f'_0+\alpha\,t\,.$$
+
+6. 差频信号的频谱表达式
+
+考虑差频信号的时域表达式：
+
+$$s_D(t)=\exp\{j[\phi_0+2\pi f'_0\,t+\pi\alpha\,t^2]\},\quad t\in[0,T_m]\,.$$
+
+在无限长时窗下，其傅里叶变换可借由 chirp 信号的解析形式给出（忽略窗函数效应），其频谱大致为：
+
+$$S_D(f)\propto \sqrt{\frac{1}{|\alpha|}}\exp\Biggl\{-j\frac{\pi}{\alpha}(f-f'_0)^2\Biggr\}\,.$$
+
+注意实际计算时会受有限时长及窗函数影响，但这一表达式揭示了：
+
+频谱中心在 $f'_0$ 附近；
+
+频谱宽度与 $\alpha$ 有关，色散效应越强（$\alpha$ 越大），频谱展宽越明显。
+
+7. 频谱扩展到时延的映射关系
+
+在色散介质中，由于不同瞬时频率对应不同群时延，我们希望建立频域中频率扩展与时延变化之间的关系。
+
+由瞬时频率表达式有：
+
+$$f_D(t)=f'_0+\alpha\,t\quad\Longrightarrow\quad t=\frac{f_D(t)-f'_0}{\alpha}\,.$$
+
+而在介质中，传播时延为：
+
+$$\tau(t)=\tau_0+\tau_1K't+\tfrac{1}{2}\tau_2(K't)^2\,.$$
+
+因此，将 $t$ 用 $f$ 表示，则对应的群时延（或延时点）：
+
+$$\tau(f)=\tau_0+\tau_1K'\,\frac{f-f'_0}{\alpha}+\frac{1}{2}\tau_2(K')^2\,\Bigl(\frac{f-f'_0}{\alpha}\Bigr)^2\,.$$
+
+这就是将差频信号频谱中某一频率 $f$ 转换为传播时延的量化映射关系。
+
+即：
+
+当 $f=f'_0$ 时，对应时延为 $\tau_0$（起始频率处时延）；
+
+当 $f$ 偏离 $f'_0$ 时，延时偏移由上式给出，其线性部分与二次项分别反映一阶和二阶色散的贡献。
+
+将差频信号频率映射回扫频信号的瞬时频率
+
+我们希望得到原始发射信号的瞬时频率（即扫频信号中的频率），记为 $f_T$。由发射信号模型有：
+
+$$f_T(t)=f_0+\frac{B}{T_m}\,t\,.$$
+
+利用上面的映射关系 $t=\frac{f-f'_0}{\alpha}$（这里的 $f$ 是差频信号的频率），则对应的发射信号的瞬时频率为：
+
+$$\boxed{f_T = f_0+\frac{B}{T_m}\,\frac{f-f'_0}{\alpha}\,.}$$
+
+这就是把混频信号中的频率 $f$ 转换为原始扫频信号中瞬时频率的公式。
+
+总结：
+
+差频信号的瞬时频率为 $f_D(t)=f'_0+\alpha\,t$；
+
+根据平稳相位，测得差频信号的频率 $f$ 与时刻 $t$ 之间的映射为 $t=\frac{f-f'_0}{\alpha}$；
+
+发射信号的瞬时频率为 $f_T(t)=f_0+\frac{B}{T_m}\,t$；
+
+故将 $t$ 代入，可得原始扫频信号的频率与差频信号频率之间的映射关系：
+
+$$f_T = f_0+\frac{B}{T_m}\,\frac{f-f'_0}{\alpha}\,.$$
+
+这一公式正是将差频信号的频率转换为原始扫频信号中瞬时频率的量化表达，为数据拟合时确定横坐标提供依据。
+
+8. 总结
+
+我们已经详细推导出：
+
+差频信号相位的展开式：
+
+$$\Delta\phi(t)=\phi_0+2\pi f'_0\,t+\pi\alpha\,t^2\,,$$
+
+其中：
+
+$$\phi_0=\omega_0\tau_0-\pi\frac{B}{T_m}\tau_0^2,$$
+
+$$2\pi f'_0=\omega_0\,\tau_1K'+2\pi\frac{B}{T_m}\tau_0-2\pi\frac{B}{T_m}\tau_0\,\tau_1K' \quad (K'=\frac{2\pi B}{T_m}),$$
+
+$$\pi\alpha=\frac{1}{2}\omega_0\tau_2(K')^2+ \pi\frac{B}{T_m}\Bigl[2\tau_1K'-\Bigl((\tau_1K')^2+2\tau_0A_2\Bigr)\Bigr] \quad \text{且 } A_2=\tfrac{1}{2}\tau_2(K')^2.$$
+
+瞬时频率表达式：
+
+$$f_D(t)=f'_0+\alpha\,t\,.$$
+
+差频信号的频谱表达式（理论上）：
+
+$$S_D(f)\propto \sqrt{\frac{1}{|\alpha|}}\exp\Biggl\{-j\frac{\pi}{\alpha}(f-f'_0)^2\Biggr\}\,.$$
+
+频率—时延映射关系：
+
+$$\tau(f)=\tau_0+\tau_1K'\,\frac{f-f'_0}{\alpha}+\frac{1}{2}\tau_2(K')^2\,\Bigl(\frac{f-f'_0}{\alpha}\Bigr)^2\,.$$
+
+该表达式说明，色散下差频信号扩展的频率成分可转换为相应的延时信息，从而反映出同一路径中不同频率成分因色散产生的时延差异。
+
+整个推导严格地将所有参数均以 $B$、$T_m$、$\omega_0$、$\tau_0$、$\tau_1$ 和 $\tau_2$ 表示，并展示了如何从发射信号出发，经由色散介质中的传播延时，到混频后得到的差频信号及其频谱，最后建立频率扩展与时延之间的映射关系。
+
+第二部分：频谱展宽与带宽 $B$ 的关系
+
+根据之前的推导，我们已经得到了 LFMCW（线性调频连续波）信号在色散介质中混频后差频信号的频谱表达式。现在，我们需要进一步推导频谱展宽与带宽 $B$（调制带宽）的具体关系。我将从差频信号的瞬时频率和频谱特性出发，明确定义频谱展宽，并推导出其与 $B$ 的量化关系。所有参数仍以 $B$、$T_m$、$\omega_0$、$\tau_0$、$\tau_1$、$\tau_2$ 表示。
+
+1. 差频信号的瞬时频率回顾
+
+差频信号的相位为：
+
+$$\Delta\phi(t) = \phi_0 + 2\pi f_0' t + \pi \alpha t^2$$
+
+其中：
+
+$\phi_0 = \omega_0 \tau_0 - \pi \frac{B}{T_m} \tau_0^2$
+
+$2\pi f_0' = \omega_0 \tau_1 K' + 2\pi \frac{B}{T_m} \tau_0 - 2\pi \frac{B}{T_m} \tau_0 \tau_1 K'$
+
+$\pi \alpha = \frac{1}{2} \omega_0 \tau_2 (K')^2 + 2\pi \frac{B}{T_m} \tau_1 K' - \pi \frac{B}{T_m} [(\tau_1 K')^2 + 2 \tau_0 A_2]$
+
+$K' = 2\pi \frac{B}{T_m}$, $A_2 = \frac{1}{2} \tau_2 (K')^2$
+
+瞬时频率：
+
+$$f_D(t) = \frac{1}{2\pi} \frac{d\Delta\phi(t)}{dt} = f_0' + \alpha t$$
+
+在调制周期 $t \in [0, T_m]$ 内，瞬时频率从 $f_D(0) = f_0'$ 变化到 $f_D(T_m) = f_0' + \alpha T_m$。
+
+2. 频谱展宽的定义
+
+频谱展宽通常是指差频信号的频率范围，即瞬时频率在 $t = 0$ 到 $t = T_m$ 的变化范围。由于差频信号是一个 chirp 信号，其频谱宽度与瞬时频率的扫频范围直接相关。因此，频谱展宽 $\Delta f_D$ 可定义为：
+
+$$\Delta f_D = |f_D(T_m) - f_D(0)| = |f_0' + \alpha T_m - f_0'| = |\alpha| T_m$$
+
+这里的 $|\alpha|$ 是差频信号的调频斜率（单位：Hz/s），$T_m$ 是调制周期，$\Delta f_D$ 即为频谱的展宽（单位：Hz）。
+
+3. 计算 $\alpha$ 与 $B$ 的关系
+
+为了得到频谱展宽与带宽 $B$ 的关系，我们需要明确 $\alpha$ 的表达式，并将其展开为 $B$ 的函数。
+
+3.1 展开 $\alpha$
+
+从之前的定义：
+
+$$\pi \alpha = \frac{1}{2} \omega_0 \tau_2 (K')^2 + 2\pi \frac{B}{T_m} \tau_1 K' - \pi \frac{B}{T_m} [(\tau_1 K')^2 + 2 \tau_0 A_2]$$
+
+其中：
+
+$K' = 2\pi \frac{B}{T_m}$
+
+$A_2 = \frac{1}{2} \tau_2 (K')^2 = \frac{1}{2} \tau_2 \left(2\pi \frac{B}{T_m}\right)^2 = 2\pi^2 \tau_2 \frac{B^2}{T_m^2}$
+
+逐项计算：
+
+第一项：
+
+$$\frac{1}{2} \omega_0 \tau_2 (K')^2 = \frac{1}{2} \omega_0 \tau_2 \left(2\pi \frac{B}{T_m}\right)^2 = 2\pi^2 \omega_0 \tau_2 \frac{B^2}{T_m^2}$$
+
+第二项：
+
+$$2\pi \frac{B}{T_m} \tau_1 K' = 2\pi \frac{B}{T_m} \tau_1 \cdot 2\pi \frac{B}{T_m} = 4\pi^2 \tau_1 \frac{B^2}{T_m^2}$$
+
+第三项：
+
+$(\tau_1 K')^2 = (\tau_1 \cdot 2\pi \frac{B}{T_m})^2 = 4\pi^2 \tau_1^2 \frac{B^2}{T_m^2}$
+
+$2 \tau_0 A_2 = 2 \tau_0 \cdot 2\pi^2 \tau_2 \frac{B^2}{T_m^2} = 4\pi^2 \tau_0 \tau_2 \frac{B^2}{T_m^2}$
+
+总和：
+
+$$(\tau_1 K')^2 + 2 \tau_0 A_2 = 4\pi^2 \frac{B^2}{T_m^2} (\tau_1^2 + \tau_0 \tau_2)$$
+
+带入：
+
+$$-\pi \frac{B}{T_m} [(\tau_1 K')^2 + 2 \tau_0 A_2] = -\pi \frac{B}{T_m} \cdot 4\pi^2 \frac{B^2}{T_m^2} (\tau_1^2 + \tau_0 \tau_2) = -4\pi^3 \frac{B^3}{T_m^3} (\tau_1^2 + \tau_0 \tau_2)$$
+
+合并：
+
+$$\pi \alpha = 2\pi^2 \omega_0 \tau_2 \frac{B^2}{T_m^2} + 4\pi^2 \tau_1 \frac{B^2}{T_m^2} - 4\pi^3 \frac{B^3}{T_m^3} (\tau_1^2 + \tau_0 \tau_2)$$
+
+整理：
+
+$$\alpha = \frac{1}{\pi} \left[ 2\pi^2 \frac{B^2}{T_m^2} (\omega_0 \tau_2 + 2 \tau_1) - 4\pi^3 \frac{B^3}{T_m^3} (\tau_1^2 + \tau_0 \tau_2) \right]$$
+
+$$\alpha = 2\pi \frac{B^2}{T_m^2} (\omega_0 \tau_2 + 2 \tau_1) - 4\pi^2 \frac{B^3}{T_m^3} (\tau_1^2 + \tau_0 \tau_2)$$
+
+3.2 分析 $\alpha$
+
+当 $B$ 较小时，$\alpha$ 主要由二次项 $2\pi \frac{B^2}{T_m^2} (\omega_0 \tau_2 + 2 \tau_1)$ 主导。
+
+当 $B$ 较大时，三次项 $-4\pi^2 \frac{B^3}{T_m^3} (\tau_1^2 + \tau_0 \tau_2)$ 的影响增强。
+
+4. 频谱展宽 $\Delta f_D$
+
+频谱展宽：
+
+$$\Delta f_D = |\alpha| T_m = T_m \left| 2\pi \frac{B^2}{T_m^2} (\omega_0 \tau_2 + 2 \tau_1) - 4\pi^2 \frac{B^3}{T_m^3} (\tau_1^2 + \tau_0 \tau_2) \right|$$
+
+整理：
+
+$$\Delta f_D = \left| 2\pi \frac{B^2}{T_m} (\omega_0 \tau_2 + 2 \tau_1) - 4\pi^2 \frac{B^3}{T_m^2} (\tau_1^2 + \tau_0 \tau_2) \right|$$
+
+4.1 小带宽近似
+
+若 $B$ 较小，三次项可忽略：
+
+$$\Delta f_D \approx 2\pi \frac{B^2}{T_m} |\omega_0 \tau_2 + 2 \tau_1|$$
+
+此时，频谱展宽与 $B^2$ 成正比，反映了二阶色散（$\tau_2$）和一阶色散（$\tau_1$）的联合效应。
+
+4.2 完整关系
+
+考虑全项：
+
+$$\Delta f_D = \frac{2\pi B^2}{T_m} \left| (\omega_0 \tau_2 + 2 \tau_1) - 2\pi \frac{B}{T_m} (\tau_1^2 + \tau_0 \tau_2) \right|$$
+
+定义：
+
+$C_1 = \omega_0 \tau_2 + 2 \tau_1$（与 $B$ 无关）
+
+$C_2 = \tau_1^2 + \tau_0 \tau_2$（与 $B$ 无关）
+
+则：
+
+$$\Delta f_D = \frac{2\pi B^2}{T_m} \left| C_1 - 2\pi \frac{B}{T_m} C_2 \right|$$
+
+5. 与带宽 $B$ 的关系分析
+
+二次主导区：当 $2\pi \frac{B}{T_m} C_2 \ll C_1$ 时，$\Delta f_D \propto B^2$。
+
+三次修正区：当 $B$ 增大，$2\pi \frac{B}{T_m} C_2$ 变得显著，$\Delta f_D$ 偏离 $B^2$ 关系，出现三次项的抑制或增强效应（取决于 $C_1$ 和 $C_2$ 的符号）。
+
+物理意义：$B$ 增大意味着调频范围 $K' T_m = 2\pi B$ 变大，色散效应（尤其是高阶项）对频率扩展的贡献更明显。
+
+6. 总结
+
+频谱展宽与带宽 $B$ 的具体关系为：
+
+$$\Delta f_D = \frac{2\pi B^2}{T_m} \left| (\omega_0 \tau_2 + 2 \tau_1) - 2\pi \frac{B}{T_m} (\tau_1^2 + \tau_0 \tau_2) \right|$$
+
+小 $B$ 时：$\Delta f_D \propto B^2$
+
+大 $B$ 时：三次项引入非线性修正。
+
+第三部分：基于 LFMCW 的色散介质等离子体电子密度高精度诊断方法研究
+
+摘要
+
+在临近空间高超声速飞行器的等离子体鞘套诊断中，线性调频连续波（LFMCW）技术面临严峻挑战。由于等离子体强烈的色散特性，微波传播群时延不再是常数，导致差频信号频谱出现严重展宽（散焦）和中心频率偏移（虚假距离）。本文提出了一种物理驱动的信号处理架构：首先基于 Drude 模型推导了色散条件下的非线性差频公式；其次，利用滑动窗口与 ESPRIT 算法提取“时间-频率-时延”特征点集；最后，构建包含系统误差项的理论模型，通过非线性最小二乘法反向拟合截止频率，从而精确解算出电子密度。该方法解决了单点测量的多解性问题，并有效抑制了色散带来的系统误差。
+
+1. 引言与问题背景
+
+传统 LFMCW 雷达测距的基本假设是：目标是“硬目标”或非色散介质（如空气），传播时延 $\tau$ 为常数。此时，差频信号 $f_{beat} = K \cdot \tau$ 为单一频率。
+
+然而，等离子体是一种典型的频率色散介质。当 LFMCW 信号（如 Ka 波段 33-36GHz）扫过等离子体时，不同频率成分的群速度 $v_g(\omega)$ 显著不同，导致：
+
+时变时延：$\tau$ 随时间 $t$ 变化，导致差频信号自身变成一个 Chirp 信号，频谱能量分散（主瓣展宽）。
+
+频率偏移：一阶色散项引入了巨大的虚假频移，使得直接测量结果不再代表物理厚度或平均时延。
+
+若不进行修正，直接使用峰值频率计算，会导致电子密度诊断出现极大误差（甚至 >100%）。
+
+2. 理论建模：色散下的 LFMCW 信号传播机制
+
+2.1 等离子体色散模型（Drude Model）
+
+假设等离子体非磁化，其相对介电常数 $\varepsilon_r$ 和群速度 $v_g$ 为角频率 $\omega$ 的函数：
+
+$$v_g(\omega) = c \sqrt{1 - \left(\frac{\omega_p}{\omega}\right)^2}$$
+
+其中 $\omega_p = \sqrt{\frac{n_e e^2}{\varepsilon_0 m_e}}$ 为等离子体特征角频率，直接对应电子密度 $n_e$。
+
+2.2 时变时延的泰勒展开
+
+LFMCW 发射频率随时间线性变化：$\omega(t) = \omega_0 + 2\pi K t$。
+将群时延 $\tau(\omega)$ 在中心频率 $\omega_0$ 处展开：
+
+$$\tau(\omega) \approx \tau_0 + \tau_1 (\omega - \omega_0) + \frac{1}{2}\tau_2 (\omega - \omega_0)^2$$
+
+代入 $\omega(t)$，得到时变时延 $\tau(t)$：
+
+$$\tau(t) = \tau_0 + (2\pi K \tau_1) t + \frac{1}{2} (2\pi K)^2 \tau_2 t^2$$
+
+$\tau_0$: 基础群时延。
+
+$\tau_1$: 一阶色散系数（群时延色散 GDD），导致频率偏移。
+
+$\tau_2$: 二阶色散系数，导致频谱散焦。
+
+2.3 差频信号的解析表达式
+
+经过混频（De-chirp）处理，差频信号的相位 $\Delta \Phi(t)$ 为发射与接收相位之差。对相位求导得到瞬时差频频率 $f_{beat}(t)$：
+
+$$f_{beat}(t) \approx \underbrace{K \tau_0}_{\text{理想项}} + \underbrace{f_0 K \tau_1}_{\text{一阶色散偏移}} + \underbrace{\left( 2 K^2 \tau_1 + f_0 K^2 \tau_2 \right) \cdot t}_{\text{二阶色散/散焦项}}$$
+
+物理意义分析：
+
+常数项包含 $f_0 K \tau_1$。由于载波 $f_0$ (e.g., 34GHz) 远大于带宽，即使 $\tau_1$ 很小，此项也会产生巨大的系统误差（偏移）。
+
+线性项（含 $t$）表明差频频率随时间变化，导致 FFT 频谱不是尖峰，而是宽带信号。
+
+3. 解决方案：特征点集提取算法
+
+为了从模糊的宽带信号中提取精确的物理信息，我们放弃全段 FFT，改用时频切片分析。
+
+3.1 滑动窗口 (Short-Time Analysis)
+
+将接收到的时域信号 $s_D(t)$ 分割为 $N$ 个重叠的时间窗口。
+
+第 $i$ 个窗口的中心时刻：$t_i$
+
+对应的探测频率（横坐标 $X$）：
+
+$$X_i = f_{probe}(t_i) = f_{start} + K \cdot t_i$$
+
+注：这是完全已知的系统参数，不依赖于介质。
+
+3.2 频率估计 (ESPRIT)
+
+对第 $i$ 个窗口内的短时信号进行频谱分析，提取局部中心频率 $f_{beat, i}$。
+
+为何选用 ESPRIT？
+
+差频信号在短窗口内近似为单频。
+
+ESPRIT 是基于子空间的超分辨率算法，不受 FFT 栅栏效应（频率离散化）限制，能精确估计出非整数倍频率。
+
+计算测量时延（纵坐标 $Y$）：
+
+$$Y_i = \tau_{meas}(t_i) = \frac{f_{beat, i}}{K}$$
+
+注：此 $Y_i$ 是包含色散误差的“表观时延”，并非真实的群时延。
+
+3.3 构建特征数据集
+
+经过上述处理，我们将一段模糊的波形转化为了一组清晰的数据点：
+
+$$\mathcal{D} = \{ (X_1, Y_1), (X_2, Y_2), \dots, (X_N, Y_N) \}$$
+
+这描绘了“表观传播时延”随“探测频率”变化的曲线。
+
+4. 参数辨识：反向拟合策略
+
+4.1 为什么要进行反向拟合？（核心论证）
+
+有人可能认为：既然得到了 $(f, \tau)$ 曲线，直接查表或作图即可得到 $f_p$。但这在工程上不可行：
+
+曲线相交（多解性）：根据 Drude 模型，低截止频率且大厚度的介质，与高截止频率且小厚度的介质，其时延曲线可能在特定频段相交。单点测量无法区分。
+
+误差耦合：我们测量的 $Y_i$ 中包含了由 $\tau_1$ 引起的一阶偏差。这个偏差本身也依赖于 $n_e$。如果我们直接拟合真实群时延公式，会忽略这个系统偏差。
+
+抗噪性：测量点必然包含噪声。通过全曲线拟合，利用最小二乘法可以统计平均掉随机噪声。
+
+4.2 构造拟合模型（Cost Function）
+
+我们需要构建一个理论函数 $G(f, \mathbf{\theta})$，其中 $\mathbf{\theta} = [f_p, d, \nu]$ 是待求参数。
+为了抵消测量原理带来的误差，理论模型必须模拟测量过程中的误差：
+
+$$Y_{theory}(f; f_p, d) = \tau_{group}(f) + \underbrace{\frac{f}{K} \cdot \frac{\partial \tau_{group}(f)}{\partial f}}_{\text{模拟一阶色散偏移误差}}$$
+
+其中 $\tau_{group}(f)$ 是标准的 Drude 群时延：
+
+$$\tau_{group}(f) = \frac{d}{c} \cdot \frac{1}{\sqrt{1 - (f_p/f)^2}}$$
+
+4.3 优化求解
+
+建立目标函数（残差平方和）：
+
+$$J(f_p, d) = \sum_{i=1}^{N} \left( Y_i - Y_{theory}(X_i; f_p, d) \right)^2$$
+
+使用非线性优化算法（如 Levenberg-Marquardt 或 遗传算法）寻找使 $J$ 最小化的 $\hat{f_p}$ 和 $\hat{d}$。
+最终电子密度解为：
+
+$$n_e = \frac{\varepsilon_0 m_e}{e^2} (2\pi \hat{f_p})^2$$
+
+5. 结论
+
+本研究针对 LFMCW 等离子体诊断中的色散难题，建立了一套完整的数学物理方法。
+
+理论层面：证明了色散会导致差频信号出现频率偏移（一阶）和线性调频（二阶），使得传统测距公式失效。
+
+技术层面：提出了利用滑动窗口结合ESPRIT算法，从时变的差频信号中解耦出频率-时延特征曲线的方法。
+
+应用层面：论证了反向拟合的必要性——它不仅解决了多参数耦合的唯一性问题，更巧妙地将测量原理自带的色散误差包含在拟合模型中，实现了“带病解算”，从而获得了高精度的电子密度测量结果。
+
+该方法无需复杂的硬件改动，仅通过信号处理算法即可显著提升诊断精度。
+
+第四部分：LFMCW 色散效应工程阈值判据的完整理论推导
+
+推导的核心目标是证明公式：
+
+$$B \cdot \eta \cdot \tau_0 \le 1$$
+
+1. 信号模型与时频定义
+
+首先定义线性调频连续波（LFMCW）的发射信号参数：
+
+带宽 (Bandwidth): $B$
+
+扫频周期 (Sweep Time): $T_m$
+
+调频斜率 (Slope): $K = \frac{B}{T_m}$
+
+中心频率 (Center Frequency): $f_0$
+
+发射信号的瞬时频率 $f_{TX}(t)$ 随时间线性变化：
+
+$$f_{TX}(t) = f_{start} + K \cdot t, \quad 0 \le t \le T_m$$
+
+2. 色散介质中的群时延展开
+
+在真空或非色散介质中，群时延 $\tau$ 是常数。但在等离子体中，群时延是频率的函数 $\tau(f)$。
+为了量化这种变化，我们在中心频率 $f_0$ 处对群时延进行 泰勒级数展开（保留一阶导数项）：
+
+$$\tau(f) \approx \tau(f_0) + \frac{d\tau}{df}\bigg|_{f_0} \cdot (f - f_0)$$
+
+其中：
+
+$\tau_0 = \tau(f_0)$ 是中心频率处的名义时延（总时延）。
+
+$\frac{d\tau}{df}$ 是群时延色散率（Group Delay Dispersion, GDD），反映时延随频率变化的快慢。
+
+由于发射频率随时间变化（$f - f_0 = K \cdot (t - t_{center})$），我们可以将频变时延转化为时变时延：
+
+$$\tau(t) \approx \tau_0 + \frac{d\tau}{df} \cdot K \cdot t'$$
+
+(注：为简化推导，忽略$t_{center}$的常数偏移，关注变化量)
+
+3. 差频信号的频率展宽 (Frequency Spread)
+
+在 LFMCW 雷达中，接收信号与发射信号混频后得到差频信号 (Beat Signal)。差频频率 $f_{beat}$ 与时延 $\tau$ 的基本关系为：
+
+$$f_{beat}(t) = K \cdot \tau(t)$$
+
+将步骤 2 中的 $\tau(t)$ 代入：
+
+$$f_{beat}(t) \approx K \cdot \left( \tau_0 + \frac{d\tau}{df} \cdot K \cdot t \right) = \underbrace{K \tau_0}_{\text{理想差频}} + \underbrace{K^2 \frac{d\tau}{df} \cdot t}_{\text{色散引起的频率漂移}}$$
+
+在整个扫频周期 $T_m$ 内，由于色散导致的差频频率变化量（展宽） $\Delta f_{beat}$ 为：
+
+$$\Delta f_{beat} = | f_{beat}(T_m) - f_{beat}(0) | = K^2 \left| \frac{d\tau}{df} \right| T_m$$
+
+利用 $K = B/T_m$ 进行代换：
+
+$$\Delta f_{beat} = \left( \frac{B}{T_m} \right)^2 \left| \frac{d\tau}{df} \right| T_m = \frac{B}{T_m} \cdot \left( \left| \frac{d\tau}{df} \right| \cdot B \right)$$
+
+这里，项 $\left( \left| \frac{d\tau}{df} \right| \cdot B \right)$ 正是带宽内的总时延变化量，我们记为 $\Delta \tau_{linear}$。
+
+4. 引入非线性度指标 $\eta$
+
+根据幻灯片 24 的定义，为了归一化衡量色散强弱，定义非线性度 $\eta$：
+
+$$\eta = \frac{\Delta \tau_{linear}}{\tau_0} = \frac{|\frac{d\tau}{df}| \cdot B}{\tau_0}$$
+
+将此代入步骤 3 的频率展宽公式：
+
+$$\Delta f_{beat} = \frac{B}{T_m} \cdot (\eta \cdot \tau_0)$$
+
+5. 工程判定准则 (The Criterion)
+
+核心逻辑：
+LFMCW 雷达通过 FFT 提取频谱，其固有的频率分辨率为 $\delta f = \frac{1}{T_m}$。
+
+如果色散引起的频率误差 $\Delta f_{beat}$ 小于一个分辨单元，则该误差被淹没在主瓣宽度内，工程上可忽略。
+
+如果误差大于一个分辨单元，会导致频谱主瓣分裂或严重展宽，必须考虑。
+
+建立不等式：
+
+$$\Delta f_{beat} \le \text{频率分辨率}$$
+
+$$\frac{B}{T_m} \cdot \eta \cdot \tau_0 \le \frac{1}{T_m}$$
+
+6. 最终推导结果
+
+在上述不等式两边同时消去 $1/T_m$，得到最终的工程阈值公式：
+
+$$\mathbf{B \cdot \eta \cdot \tau_0 \le 1}$$
+
+7. 附录：等离子体 $\eta$ 的物理推导
+
+为了验证幻灯片 24 中具体的 $\eta(f_0)$ 表达式，我们基于 Drude 模型推导。
+
+等离子体群时延公式（路径长度为 $d$）：
+
+$$\tau(f) = \frac{d}{v_g} = \frac{d}{c \sqrt{1 - (f_p/f)^2}} = \frac{d}{c} [1 - (f_p/f)^2]^{-1/2}$$
+
+对 $f$ 求导：
+
+$$\frac{d\tau}{df} = \frac{d}{c} \cdot \left( -\frac{1}{2} \right) [1 - (f_p/f)^2]^{-3/2} \cdot \left( -2 f_p^2 f^{-3} \right)$$
+
+整理得：
+
+$$\frac{d\tau}{df} = -\frac{d}{c} \frac{1}{\sqrt{1-(f_p/f)^2}} \cdot \frac{(f_p/f)^2}{f [1-(f_p/f)^2]} = -\tau(f) \cdot \frac{1}{f} \cdot \frac{(f_p/f)^2}{1-(f_p/f)^2}$$
+
+取绝对值并代入 $\eta$ 的定义 $\eta = \frac{|d\tau/df| \cdot B}{\tau}$：
+
+$$\eta = \frac{1}{\tau} \cdot \left( \tau \cdot \frac{1}{f} \frac{(f_p/f)^2}{1-(f_p/f)^2} \right) \cdot B$$
+
+$$\eta = \frac{B}{f} \cdot \frac{(f_p/f)^2}{1 - (f_p/f)^2}$$
+
+幻灯片 24 中的公式形式稍有不同（使用了 $f_c$ 代替 $f_p$ 并做了通分），我们来验证其一致性。
+幻灯片公式为：
+
+$$\eta = \frac{B}{f_0} \cdot \frac{(f_c/f_0)^2 [1-(f_c/f_0)^2]^{-3/2}}{[1-(f_c/f_0)^2]^{-1/2}}$$
+
+分子分母约分 $[1-(f_c/f_0)^2]$ 项：
+
+$$\eta = \frac{B}{f_0} \cdot \frac{(f_c/f_0)^2}{1 - (f_c/f_0)^2}$$
+
+结论：推导结果完全一致。
+
+总结论
+
+该推导严密地构建了从物理模型到信号处理误差再到系统分辨率限制的逻辑链条。
+
+物理意义： 不等式 $B \cdot \eta \cdot \tau_0 \le 1$ 告诉我们，带宽越宽 ($B$)、介质越接近截止频率 ($\eta$)、传播距离越远 ($\tau_0$)，色散效应越显著。
+
+工程价值： 在系统设计阶段，只需代入这三个参数，若乘积小于 1，即可安全地使用传统算法；若大于 1，则必须使用本文提出的反向拟合等高级算法。
+
+第五部分：基于 LFMCW 滑动窗口特征提取与反向拟合的色散等离子体高精度诊断方法
+
+(本部分为综合性学术文档结构，融合了上述理论与高级算法)
+
+摘要
+
+针对临近空间高超声速飞行器等离子体鞘套诊断中存在的强色散效应与多径干扰问题，本文提出了一种基于线性调频连续波（LFMCW）的新型电子密度诊断方法。传统微波干涉法在强色散区会因群速度频率依赖性产生非线性时延，导致测量误差。本研究首先建立了色散介质下的 LFMCW 非线性差频信号模型；其次，引入基于 MDL 准则的 ESPRIT 算法，在滑动时间窗口内剔除多径干扰并提取“频率-时延”特征点集；最后，构建加权非线性最小二乘模型，利用 Levenberg-Marquardt（LM）算法对特征曲线进行反向拟合，从而实现对等离子体特征频率（电子密度）的高精度解算。
+
+1. 理论建模：色散条件下的信号传播机制
+
+1.1 等离子体色散特性（Drude Model）
+
+假设等离子体为非磁化均匀介质，根据 Drude 模型，其群速度 $v_g$ 随角频率 $\omega$ 变化：
+
+$$v_g(\omega) = c \sqrt{1 - \left(\frac{\omega_p}{\omega}\right)^2}$$
+
+其中 $\omega_p = \sqrt{\frac{n_e e^2}{\varepsilon_0 m_e}}$ 为等离子体特征角频率，直接对应待测电子密度 $n_e$。
+
+1.2 时变群时延与非线性差频
+
+LFMCW 信号的瞬时频率随时间线性变化 $\omega(t) = \omega_0 + 2\pi K t$（$K$为调频斜率）。在色散介质中，群时延 $\tau$ 不再是常数，而是频率的函数 $\tau(\omega)$。将群时延在中心频率处展开至二阶：
+
+$$\tau(t) \approx \tau_0 + (2\pi K \tau_1) t + \frac{1}{2} (2\pi K)^2 \tau_2 t^2$$
+
+其中 $\tau_1$ (一阶色散) 和 $\tau_2$ (二阶色散) 分别导致了差频信号的频率偏移和频谱展宽。
+
+混频后的差频信号瞬时频率 $f_{beat}(t)$ 为：
+
+$$f_{beat}(t) \approx K \tau_0 + \underbrace{f_0 K \tau_1}_{\text{系统性频移误差}} + \underbrace{(2 K^2 \tau_1 + f_0 K^2 \tau_2) t}_{\text{线性调频项(散焦)}}$$
+
+结论：直接对全段信号进行 FFT 会得到展宽严重且中心偏移的频谱，无法直接用于计算物理距离或密度。必须采用时频切片分析。
+
+1.3 全频段分析的局限性与滑动窗口的物理逻辑
+
+上述 2.4 节和 2.5 节的推导展示了频率映射的理论关系，但在实际的等离子体反演中，直接利用全频段 FFT 分析存在根本性的物理逻辑矛盾，这正是传统方法失效的原因：
+
+参数依赖的循环逻辑（死循环）：
+原推导试图利用 $f_T = f_0 + \frac{B}{T_m} (\frac{f - f'_0}{\alpha})$ 建立差频 $f$ 与发射频率 $f_T$ 的映射。然而，该映射关系高度依赖于参数 $\alpha$。在强色散介质（如等离子体截止频率附近）中，调频斜率 $\alpha$ 本身是频率的强函数（因为二阶色散 $\tau_2(\omega)$ 随频率剧烈变化，并非泰勒展开假设的常数）。如果我们想通过该公式反推 $f_T$，必须预先知道色散参数 $\alpha$，而 $\alpha$ 正是我们待求的未知量。 这在逻辑上构成了无法解开的死循环。
+
+频率尺度的非线性扭曲：
+由于 $\alpha$ 随频率变化，整个频域的尺度发生了严重的非线性扭曲（拉伸或压缩）。这意味着全局频谱上的频率轴已经不再是线性的，直接读取峰值或展宽边缘无法对应到真实的物理频率点。此时，差频信号的频谱不仅展宽，而且发生了畸变，单一的“中心频率”或“展宽宽度”失去了明确的物理对应关系。
+
+滑动窗口的纠正逻辑：以时间定频率
+为了打破上述循环，必须改变观测视角：我们不需要从“模糊且扭曲的频谱”反推时间，而是直接控制时间。
+
+我们在时刻 $t_i$ 截取滑动窗口。
+
+横坐标的刚性定义：时刻 $t_i$ 的发射频率 $f_{probe}(t_i)$ 是已知且固定的（由发射机硬件决定，$f_{probe} = f_0 + K t_i$），不受介质色散影响。
+
+纵坐标的局部测量：在极短的窗口内，介质可近似为局部平稳，此时测量得到的差频 $f_{beat}$ 直接对应当前的群时延 $\tau(t_i)$。
+
+通过这种方式，我们将一个复杂的全频段非线性反演问题，解耦为一系列局部的线性测量问题，从而构建出精确的“频率-时延”特征曲线，为后续的参数反演提供可靠的数据基础。
+
+2. 信号处理架构：特征提取与多径抑制
+
+为了从非平稳的差频信号中提取精确的物理信息，本文采用“滑动窗口 + 子空间估计”的处理框架。
+
+2.1 滑动窗口与瞬时探测频率
+
+将接收到的差频信号分割为 $N$ 个重叠的时间窗口。对于第 $i$ 个窗口，其中心时刻 $t_i$ 对应的探测频率（系统已知量）为：
+
+$$X_i = f_{probe}(t_i) = f_{start} + K \cdot t_i$$
+
+2.2 基于 MDL 准则的多径抑制
+
+在微波暗室或金属腔体实验中，存在直达波与反射波的多径效应。为了防止 ESPRIT 算法将反射杂波误判或混叠，需先估计信号源数量。
+
+采用**最小描述长度（Minimum Description Length, MDL）**准则确定信源数 $k$：
+
+$$\text{MDL}(k) = -\ln\left( \frac{\prod_{j=k+1}^{M} \lambda_j^{\frac{1}{M-k}}}{\frac{1}{M-k} \sum_{j=k+1}^{M} \lambda_j} \right)^{(M-k)L} + \frac{1}{2} k (2M-k) \ln L$$
+
+$M$：窗口长度；$L$：快拍数；$\lambda_j$：协方差矩阵特征值（降序排列）。
+
+策略：寻找使 $\text{MDL}(k)$ 最小的 $k$ 值作为真实信号源数量。
+
+2.3 ESPRIT 超分辨频率估计
+
+利用旋转不变子空间算法（ESPRIT）在每个窗口内进行频率估计，得到 $k$ 个频率分量。
+
+物理判据：由于反射路径必然长于直达路径，且反射波经历多次衰减，取 $k$ 个结果中频率最小且能量显著的分量作为直达波的差频 $f_{beat, i}$。
+
+测量时延计算：
+
+$$Y_i = \tau_{meas}(t_i) = \frac{f_{beat, i}}{K}$$
+
+由此，构建出观测特征数据集：$\mathcal{D} = \{ (X_i, Y_i) \}_{i=1}^N$。
+
+3. 核心算法：加权反向拟合与 LM 优化
+
+由于色散效应，测量得到的 $Y_i$ 包含了系统误差。本节通过构建包含误差项的正向理论模型，利用加权非线性最小二乘法反演等离子体参数。
+
+3.1 包含误差项的理论模型
+
+构建理论观测函数 $G(f, \mathbf{\theta})$，其中待求参数向量 $\mathbf{\theta} = [\omega_p, d]$。该模型不仅包含物理群时延，还显式包含了测量原理引入的一阶色散误差：
+
+$$Y_{theory}(f; \omega_p, d) = \tau_{group}(f) + \underbrace{\frac{f}{K} \cdot \frac{\partial \tau_{group}(f)}{\partial f}}_{\text{一阶色散修正项}}$$
+
+其中 Drude 模型群时延 $\tau_{group}(f) = \frac{d}{c} \frac{1}{\sqrt{1 - (\omega_p/2\pi f)^2}}$。
+
+3.2 加权代价函数 (Weighted Cost Function)
+
+考虑到当探测频率 $f$ 接近等离子体截止频率 $f_p$ 时，信号衰减剧烈，信噪比（SNR）显著下降，数据可靠性降低。为了防止低信噪比数据主导拟合结果，引入加权矩阵。
+
+定义目标函数：
+
+$$J(\mathbf{\theta}) = \sum_{i=1}^{N} w_i \cdot \left( Y_i - Y_{theory}(X_i; \mathbf{\theta}) \right)^2$$
+
+权重因子设计：
+利用滑动窗口内的信号幅度 $A_i$ 构造权重，使高信噪比（平坦区）数据对拟合贡献更大：
+
+$$w_i = \left( \frac{A_i}{\max(\mathbf{A})} \right)^2$$
+
+3.3 Levenberg-Marquardt (LM) 优化算法
+
+鉴于 Drude 模型在截止频率附近具有高度非线性（导数变化剧烈），传统的梯度下降法收敛慢且易震荡。本文采用 LM 算法进行参数迭代求解。
+
+定义残差向量 $\mathbf{r}(\mathbf{\theta})$，其第 $i$ 元素为 $r_i = \sqrt{w_i}(Y_i - Y_{theory}(X_i, \mathbf{\theta}))$。
+计算雅可比矩阵（Jacobian Matrix）$\mathbf{J}$，其中 $J_{ij} = \frac{\partial r_i}{\partial \theta_j}$。
+
+LM 迭代公式：
+
+$$\mathbf{\theta}_{k+1} = \mathbf{\theta}_{k} - \left( \mathbf{J}^T \mathbf{J} + \mu \mathbf{I} \right)^{-1} \mathbf{J}^T \mathbf{r}$$
+
+阻尼因子 $\mu$ 的作用：
+
+当 $\mu$ 较大时，算法近似为梯度下降法，保证在初始阶段的稳定性；
+
+当 $\mu$ 较小时，算法近似为高斯-牛顿法，利用二阶曲率信息在极值点附近实现二次收敛（快速锁定最优解）。
+
+4. 算法流程总结
+
+数据采集：获取 LFMCW 差频时域信号 $s_D(t)$。
+
+时频切片：
+
+滑动窗口截取短时信号。
+
+计算幅度谱 $A_i$ 并设置权重 $w_i$。
+
+MDL 准则判断信源数 $k$，剔除多径干扰。
+
+ESPRIT 提取直达波频率，生成测量点集 $(X_i, Y_i)$。
+
+参数反演：
+
+初始化参数 $\mathbf{\theta}_0$。
+
+计算理论模型值 $Y_{theory}$ 及雅可比矩阵 $\mathbf{J}$。
+
+执行 LM 算法 迭代更新 $\mathbf{\theta}$，直至残差收敛。
+
+结果输出：输出最优解 $\hat{\omega}_p$，计算电子密度 $n_e = \frac{\varepsilon_0 m_e}{e^2} \hat{\omega}_p^2$。
+
+5. 结论
+
+本方法通过特征提取克服了色散导致的频谱模糊，通过MDL 多径抑制提纯了信号，通过加权 LM 拟合解决了色散模型的高度非线性与信噪比不均问题。相比传统方法，该方案有效地将色散从“干扰项”转化为“信息源”，显著提升了高密度等离子体的诊断精度。
+
+LFMCW 色散诊断中的参数敏感度与反演策略
+
+这一章节不仅回答了“为什么要忽略碰撞频率”，更通过严密的数学推导，解释了您的代码中 calculate_theoretical_delay 函数背后的物理真理。
+
+3.1 等离子体群时延的精确物理模型
+
+在反演算法（见代码 calculate_theoretical_delay 函数）中，我们采用了基于 Drude 模型的全复数形式来计算理论群时延。为了明确反演参数的物理意义，本节首先给出该计算过程的完整解析数学描述。
+
+等离子体的复介电常数 $\tilde{\varepsilon}_r(\omega)$ 由 Drude 模型给出：
+
+$$\tilde{\varepsilon}_r(\omega) = 1 - \frac{\omega_p^2}{\omega(\omega + j\nu_e)} = \left( 1 - \frac{\omega_p^2}{\omega^2 + \nu_e^2} \right) + j \left( \frac{\nu_e}{\omega} \frac{\omega_p^2}{\omega^2 + \nu_e^2} \right)$$
+
+其中，
+
+$\omega$ 为角频率
+
+$\omega_p$ 为等离子体特征频率（对应电子密度 $n_e$）
+
+$\nu_e$ 为碰撞频率
+
+电磁波在介质中的复传播常数 $\tilde{k}(\omega)$ 定义为：
+
+$$\tilde{k}(\omega) = \frac{\omega}{c} \sqrt{\tilde{\varepsilon}_r(\omega)} = \beta(\omega) - j\alpha(\omega)$$
+
+此处 $\beta(\omega)$ 为相位常数，决定波的相位延迟；$\alpha(\omega)$ 为衰减常数，决定波的幅度衰减。
+
+当电磁波穿过厚度为 $d$ 的等离子体时，其相位变化量 $\Phi(\omega)$ 为：
+
+$$\Phi(\omega) = \text{Re}\{ \tilde{k}(\omega) \} \cdot d = \frac{\omega d}{c} \text{Re}\left\{ \sqrt{1 - \frac{\omega_p^2}{\omega^2 + \nu_e^2} + j \frac{\nu_e \omega_p^2}{\omega(\omega^2 + \nu_e^2)}} \right\}$$
+
+根据群时延的定义 $\tau_g = \frac{d\Phi}{d\omega}$，等离子体引起的总群时延解析式为：
+
+$$\tau_{plasma}(\omega; n_e, \nu_e) = \frac{d}{d\omega} \left[ \frac{\omega d}{c} \text{Re}\left( \sqrt{\tilde{\varepsilon}_r(\omega)} \right) \right]$$
+
+在实际诊断中，我们测量的是相对于真空传播的相对群时延 $\Delta \tau$：
+
+$$\Delta \tau(\omega) = \tau_{plasma}(\omega) - \frac{d}{c}$$
+
+注：上述公式即为代码中 calculate_theoretical_delay 函数的数学原型。代码通过 phi = -real(k)*d 计算相位，并利用 diff(phi)./diff(omega) 进行数值微分，其本质正是对上述解析式的数值求解。
+
+3.2 碰撞频率影响的量级分析（二阶小量证明）
+
+为了论证在仅有群时延数据时反演 $\nu_e$ 的不可行性，我们需要分析 $\nu_e$ 对 $\tau_{plasma}$ 的贡献量级。
+
+在典型的透射诊断工况下（例如 Ka 波段 $f \approx 34 \text{ GHz}$），角频率 $\omega \approx 2.1\times 10^{11} \text{ rad/s}$，而碰撞频率 $\nu_e$ 通常在 $10^9 \text{ Hz}$ 量级。满足 高频弱碰撞条件：
+
+$$\left( \frac{\nu_e}{\omega} \right)^2 \ll 1$$
+
+基于此条件，对复介电常数的实部 $\varepsilon'$ 进行泰勒级数展开：
+
+$$\varepsilon'(\omega) = \text{Re}(\tilde{\varepsilon}_r) = 1 - \frac{\omega_p^2}{\omega^2(1 + \nu_e^2/\omega^2)} = 1 - \frac{\omega_p^2}{\omega^2} \left[ 1 - \left(\frac{\nu_e}{\omega}\right)^2 + O\left(\left(\frac{\nu_e}{\omega}\right)^4\right) \right]$$
+
+整理得：
+
+$$\varepsilon'(\omega) \approx \underbrace{\left( 1 - \frac{\omega_p^2}{\omega^2} \right)}_{\text{主导项 (无碰撞)}} + \underbrace{\frac{\omega_p^2}{\omega^2} \left( \frac{\nu_e}{\omega} \right)^2}_{\text{碰撞修正项}}$$
+
+由上式可见：
+
+电子密度 ($n_e \propto \omega_p^2$) 出现在主导项中，对介电常数（及群时延）起一阶决定作用。
+
+碰撞频率 ($\nu_e$) 出现在修正项中，且以 $(\nu_e/\omega)^2$ 的形式存在。这是一个典型的二阶小量。
+
+相比之下，考察介电常数虚部（衰减项）$\varepsilon''(\omega)$：
+
+$$\varepsilon''(\omega) \approx \frac{\omega_p^2}{\omega^2} \left( \frac{\nu_e}{\omega} \right)$$
+
+此处 $\nu_e$ 为一阶线性项。
+
+理论结论：碰撞频率 $\nu_e$ 对群时延的影响是二阶微扰，而对幅度衰减的影响是一阶主导。因此，群时延对 $\nu_e$ 的变化具有天然的“钝感”。
+
+3.3 数值灵敏度验证与对比
+
+利用建立的物理模型（Matlab 代码仿真），我们在 $f \in [34, 38] \text{ GHz}$，$d=15 \text{ cm}$，$n_e=10^{19} \text{ m}^{-3}$ 的条件下，考察 $\nu_e$ 在 $[0.1 \text{ GHz}, 10.0 \text{ GHz}]$（变化幅度达 100 倍）范围内变化时，系统响应的差异。
+
+仿真结果表明：
+
+群时延响应：当 $\nu_e$ 增加 100 倍时，相对群时延曲线 $\Delta \tau(f)$ 的最大偏移量 $\delta \tau_{max} \approx 0.005 \text{ ns}$。该变化量远低于现有硬件系统的测量不确定度（通常 $> 0.1 \text{ ns}$）。在测量曲线上，不同 $\nu_e$ 对应的曲线几乎完全重合。
+
+幅度响应：同等条件下，信号的透射幅度衰减变化超过 $20 \text{ dB}$。
+
+这一显著的量级对比（$0.005 \text{ ns}$ vs $20 \text{ dB}$）证实了：在缺乏高精度幅度校准数据的情况下，试图从微小的时延抖动中提取 $\nu_e$ 是物理上不可能的。
+
+3.4 反演问题的病态性分析（最优化理论视角）
+
+将上述物理特性映射到参数反演的数学模型中，我们构建最小二乘目标函数 $J(\theta)$，其中 $\theta = [n_e, \nu_e]^T$：
+
+$$J(n_e, \nu_e) = \sum_{i=1}^{N} \left\| \tau_{meas}(f_i) - \tau_{theory}(f_i; n_e, \nu_e) \right\|^2$$
+
+优化算法（如 Gauss-Newton 或 Levenberg-Marquardt）的收敛性取决于雅可比矩阵 $\mathbf{J}_{jac}$ 的性质。$\mathbf{J}_{jac}$ 的第 $k$ 行定义为：
+
+$$\mathbf{J}_{k} = \left[ \frac{\partial \tau(f_k)}{\partial n_e}, \quad \frac{\partial \tau(f_k)}{\partial \nu_e} \right]$$
+
+根据 3.2 节的灵敏度分析：
+
+$\frac{\partial \tau}{\partial n_e}$ 数值显著（主导项），提供了明确的搜索梯度。
+
+$\frac{\partial \tau}{\partial \nu_e} \approx 0$（二阶小量），导致目标函数曲面在 $\nu_e$ 维度上呈现极度平坦的特征（Flat Valley）。
+
+这将导致海森矩阵近似（Hessian Approximation）$\mathbf{H} \approx \mathbf{J}_{jac}^T \mathbf{J}_{jac}$ 的条件数（Condition Number）趋于无穷大：
+
+$$\text{cond}(\mathbf{H}) = \frac{\lambda_{max}}{\lambda_{min}} \to \infty$$
+
+后果：
+
+奇异性（Singularity）：矩阵接近奇异，无法求逆，导致迭代步长计算失败。
+
+不收敛或漂移：算法无法确定 $\nu_e$ 的正确方向，$\nu_e$ 可能在搜索空间内随机漂移，或者在初始值附近停滞。
+
+误差耦合：由于数值噪声的存在，$\nu_e$ 的随机漂移会通过微弱的耦合效应补偿到 $n_e$ 上，反而降低了电子密度 $n_e$ 的反演精度。
+
+3.5 本章小结：参数降维策略的科学性
+
+综上所述，虽然全复数 Drude 模型在理论上包含碰撞频率 $\nu_e$，但在仅依赖群时延数据的反演任务中，$\nu_e$ 表现为不可观测的二阶微扰量。
+
+因此，本研究采取参数降维策略：在反演过程中将 $\nu_e$ 固定为经验常数（例如 $1.5 \text{ GHz}$），仅对电子密度 $n_e$ 进行单参数寻优。
+
+理论误差分析表明，由 $\nu_e$ 的不确定性（例如 $\pm 50\%$）引入的时延模型误差小于 $0.005 \text{ ns}$，相对于电子密度引起的纳秒级时延变化，该误差完全可以忽略。这一策略在保证物理模型完备性的同时，有效规避了反演问题的病态性，确保了诊断结果的鲁棒性。
